@@ -1,0 +1,163 @@
+<!-- navbar  -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid">
+        <a class="navbar-brand"><img src="../../assets/images/logo small.png" class="img-fluid img logo" alt="" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-3">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#" routerLink="/admin">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-bold">Features</a>
+                </li>
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle active" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ loggedUser }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" (click)="logOut()">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- navbar  -->
+<div class="colorbar" style="
+    height: 1rem;
+    background: linear-gradient(to right, #c9e265, #38b6ff);
+    border-radius: 1.5rem;
+  "></div>
+
+<div>
+    <form name="staffform" #form="ngForm" autocomplete="off" style="padding: 30px" (ngSubmit)="onSubmit(form)">
+        <!-- staff ID  making this as hidden-->
+        <input type="hidden" name="StaffId" #StaffId="ngModel" [(ngModel)]="staffService.staffFormData.StaffId" />
+
+        <!-- Staff first Name -->
+        <div class="form-group">
+            <label style="color: black">First Name : </label>
+            <input type="text" name="FirstName" #FirstName="ngModel" [(ngModel)]="staffService.staffFormData.FirstName"
+                class="form-control" placeholder="Enter  first name" minlength="2" maxlength="15" required
+                [ngClass]="{ 'is-invalid': FirstName.touched && FirstName.invalid }" />
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="FirstName.touched && FirstName.invalid"
+                style="color: red; text-align: left">
+                <div *ngIf="FirstName.errors.required">First Name is required!</div>
+            </div>
+        </div>
+
+        <!-- Staff last  Name -->
+        <div class="form-group">
+            <label style="color: black">Last Name : </label>
+            <input type="text" name="LastName" #LastName="ngModel" [(ngModel)]="staffService.staffFormData.LastName"
+                class="form-control" placeholder="Enter  last name" minlength="1" maxlength="15" required
+                [ngClass]="{ 'is-invalid': LastName.touched && LastName.invalid }" />
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="LastName.touched && LastName.invalid"
+                style="color: red; text-align: left">
+                <div *ngIf="LastName.errors.required">Last Name is required!</div>
+            </div>
+        </div>
+
+        <!-- Mobile number -->
+        <div class="form-group">
+            <label style="color: black">Phone : </label>
+            <input type="number" name="Phone" #Phone="ngModel" [(ngModel)]="staffService.staffFormData.Phone"
+                class="form-control" placeholder="Enter  your mobile number" minlength="10" maxlength="10" min="0000000000" max="9999999999"   oninput="validity.valid||(value='');" required
+                [ngClass]="{ 'is-invalid': Phone.touched && Phone.invalid }" />
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="Phone.touched && Phone.invalid" style="color: red; text-align: left">
+                <div *ngIf="Phone.errors.required">Phone number is required!</div>
+            </div>
+        </div>
+
+        <!-- staff DOB -->
+        <div class="form-group">
+            <label> DOB : </label>
+            <input type="date" name="DateOfBirth" #DateOfBirth="ngModel"
+                [(ngModel)]="staffService.staffFormData.DateOfBirth" class="form-control"
+                placeholder="Enter DateOfBirth" required
+                [ngClass]="{ 'is-invalid': DateOfBirth.touched && DateOfBirth.invalid }" />
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="DateOfBirth.touched && DateOfBirth.invalid"
+                style="color: red; text-align: left">
+                <div *ngIf="DateOfBirth.errors.required">DateOfBirth is required!</div>
+            </div>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group">
+            <label style="color: black"> Address: </label>
+            <input type="text" name="Address" #Address="ngModel" [(ngModel)]="staffService.staffFormData.Address"
+                class="form-control" placeholder="Enter Address" minlength="4" maxlength="30" required
+                [ngClass]="{ 'is-invalid': Address.touched && Address.invalid }" />
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="Address.touched && Address.invalid"
+                style="color: red; text-align: left">
+                <div *ngIf="Address.errors.required">Address is required!</div>
+            </div>
+        </div>
+
+        <!-- Qualifications dropdown -->
+        <div class="form-group">
+            <label style="color: black">Qualification :</label>
+            <select name="QualificationsId" id="QualificationsId" class="form-control" #QualificationsId="ngModel"
+                [(ngModel)]="staffService.staffFormData.QualificationsId">
+                <option value="0" disabled></option>
+                <option *ngFor="let q of staffService.qualify" value="{{ q.QualificationsId }}">
+                    {{ q.Qualification }}
+                </option>
+            </select>
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="QualificationsId.touched && QualificationsId.invalid"
+                style="color: red; text-align: left">
+                <div *ngIf="QualificationsId.errors.required">
+                    Qualification is required!
+                </div>
+            </div>
+        </div>
+
+        <!-- roles dropdown -->
+        <div class="form-group">
+            <label style="color: black">Role :</label>
+            <select name="RoleId" id="RoleId" class="form-control" #RoleId="ngModel"
+                
+                [(ngModel)]="staffService.staffFormData.RoleId">
+                <option value="0" disabled></option>
+                <option *ngFor="let r of staffService.roles" value="{{ r.RoleId }}">
+                    {{ r.Role1 }}
+                </option>
+            </select>
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="RoleId.touched && RoleId.invalid"
+                style="color: red; text-align: left">
+                <div *ngIf="RoleId.errors.required">Role is required!</div>
+            </div>
+        </div>
+
+        <!-- IsActive -->
+        <div class="form-group">
+            <div class="form-check">
+                <label class="form-check-label">In Service</label>
+                <input type="checkbox" name="Status" id="Status" #Status="ngModel"
+                    [(ngModel)]="staffService.staffFormData.Status" class="form-check-input">
+
+            </div>
+        </div>
+
+        <!-- submit -->
+        <br />
+        <div class="form-group">
+            <button type="submit" class="btn btn-lg btn-primary form-control" [disabled]="!(form.valid && form.dirty)">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>

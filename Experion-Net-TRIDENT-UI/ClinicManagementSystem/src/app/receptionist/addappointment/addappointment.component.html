@@ -1,0 +1,42 @@
+<h3 style="text-align: center;">Book Appointment </h3><br>
+<div class="container">
+    <div class="row" >                
+                  <!-- <h3 style="text-align: center;">New Appointment</h3>--><br>
+                   <form class="form-group" id="bookappoint" #form="ngForm" autocomplete="off" (ngSubmit)="OnSubmit(form)">
+                      <!--<input type="hidden" name="AppointmentId" #AppointmentId="ngModel" [(ngModel)]="receptionservice.appFormData.AppointmentId">-->
+                    <br>
+                    <input type="hidden" id="token" name="TokenNo" readonly style="width:15%;"   #TokenNo="ngModel" [(ngModel)]="receptionservice.appointcnt"><br><br>
+                       <label>Patient :</label><br>
+                        <input list="patient" (blur)="isIdInList()" name="PatientId"  minlength="1" maxlength="5" #PatientId="ngModel" oninput="validity.valid" [(ngModel)]="receptionservice.appFormData.PatientId"required
+                        [ngClass]="{'is-invalid': PatientId.touched && PatientId.invalid}"/> &nbsp;&nbsp;&nbsp;  <a (click)="addPatients()" class="link">Go to Add Patients</a>
+                        <datalist id="patient">
+                          <option  *ngFor="let patient of patientservice.patients"   value="{{patient.PatientId}}">{{patient.PatientName}} | {{patient.Phone}}</option>
+                        </datalist>
+                        <div class="validation-errors"  *ngIf="PatientId.touched && PatientId.invalid" style="color: rgb(255, 0, 0); text-align: left;">
+                            <div *ngIf="PatientId.errors.required">
+                                PatientId is required!
+                            </div>
+                            </div>
+                        <br>
+                       <label>Available Doctor:</label> <br>
+                       <select required id="doc" name="DoctorId" [(ngModel)]="receptionservice.appFormData.DoctorId" #DoctorId="ngModel">
+                           <option *ngFor="let staff of receptionservice.roles" value="{{staff.StaffId}}">Dr.{{staff.Name}}</option> >
+                       </select><br>
+                       <div class="validation-errors" *ngIf="DoctorId.touched && DoctorId.invalid" style="color: rgb(255, 0, 0); text-align: left;">
+                        <div *ngIf="DoctorId.errors.required">
+                            Select a Doctor name !
+                        </div>
+                        </div>
+                       <input type="hidden" name="ReceptionistId" [(ngModel)]="receptionservice.appFormData.ReceptionistId" #ReceptionistId>
+                       <label>Appointment Date/Time :</label><br>
+                       <input type="datetime-local" required id="date" [min]="dmin" (blur)="isDateBeforeToday()" #AppointmentDate="ngModel" name="AppointmentDate" [(ngModel)]="receptionservice.appFormData.AppointmentDate"> <br>
+                       <div class="validation-errors" *ngIf="AppointmentDate.touched && AppointmentDate.invalid" style="color: rgb(255, 0, 0); text-align: left;">
+                        <div *ngIf="AppointmentDate.errors.required">
+                            Select a Appointment Date !
+                        </div>
+                        </div>
+                       <input type="hidden" name="Status" [(ngModel)]="receptionservice.appFormData.Status" #Status><br>
+                        <button type="submit" class="btn btn-primary btn-lg" [disabled]="!(form.valid && form.dirty )">Book Appointment</button>
+                   </form>               
+                </div>
+

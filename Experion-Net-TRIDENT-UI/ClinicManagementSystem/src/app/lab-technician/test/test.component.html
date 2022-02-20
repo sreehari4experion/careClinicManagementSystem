@@ -1,0 +1,158 @@
+<!-- navbar  -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid">
+        <a class="navbar-brand"><img src="../../assets/images/logo small.png" class="img-fluid img logo" alt="" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-3">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#" routerLink="/lab-technician">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-bold">Features</a>
+                </li>
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle active" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ loggedUser |uppercase }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" (click)="logOut()">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- navbar  -->
+<div class="colorbar" style="
+      height: 1rem;
+      background: linear-gradient(to right, #c9e265, #38b6ff);
+      border-radius: 1.5rem;
+    "></div>
+
+
+<div>
+
+    <!-- template driven -->
+    <a href="/lab-technician" class="btn btn-dark">Go Back</a>
+    <!-- (ngSubmit)="onSubmit(form)" -->
+    <form name="patientform" #form="ngForm" autocomplete="off" style="padding: 30px;" (ngSubmit)="onSubmit(form)">
+        <!-- employee ID  making this as hidden-->
+        <input type="hidden" name="TestId" [(ngModel)]="labtestService.formDataOne.TestId">
+        <!-- TestId -->
+        <!-- <div class="form-group">
+        <label>Test ID : </label>
+        <input type="text" name="TestId"  #PatientName="ngModel" [(ngModel)]="labtestService.formDataOne.TestId" class="form-control" placeholder="Enter test Id"  required 
+        [ngClass]="{'is-invalid': TestId.touched && TestId.invalid}">
+         validation -->
+        <!-- <div class="validation-errors" *ngIf="TestId.touched && TestId.invalid" style="color: red; text-align: left;">
+            <div *ngIf="TestId.errors.required">
+                Test Id is required!
+            </div>
+        </div>
+    </div>  -->
+
+        <!-- Test Name -->
+        <div class="form-group">
+            <label>Test Name : </label>
+            <input type="text" name="TestName" #TestName="ngModel" [(ngModel)]="labtestService.formDataOne.TestName"
+                class="form-control" placeholder="Enter test name" minlength="4" maxlength="25" required
+                [ngClass]="{'is-invalid': TestName.touched && TestName.invalid}">
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="TestName.touched && TestName.invalid"
+                style="color: red; text-align: left;">
+                <div *ngIf="TestName.errors.required">
+                    Test Name is required!
+                </div>
+            </div>
+        </div>
+        <!--  Test Description -->
+        <div class="form-group">
+            <label>Test Description : </label>
+            <input type="text" name="TestDescription" #TestDescription="ngModel"
+                [(ngModel)]="labtestService.formDataOne.TestDescription" class="form-control"
+                placeholder="Enter description" minlength="5" maxlength="30" required
+                [ngClass]="{'is-invalid': TestDescription.touched && TestDescription.invalid}">
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="TestDescription.touched && TestDescription.invalid"
+                style="color: red; text-align: left;">
+                <div *ngIf="TestDescription.errors.required">
+                    Test Description is required!
+                </div>
+            </div>
+        </div>
+        <!-- Unit -->
+        <div class="form-group">
+            <label>Unit : </label>
+            <input type="text" name="Unit" #Unit="ngModel" [(ngModel)]="labtestService.formDataOne.Unit"
+                class="form-control" placeholder="Enter Unit" minlength="2" maxlength="12" required
+                [ngClass]="{'is-invalid': Unit.touched && Unit.invalid}">
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="Unit.touched && Unit.invalid" style="color: red; text-align: left;">
+                <div *ngIf="Unit.errors.required">
+                    Unit is required!
+                </div>
+            </div>
+        </div>
+        <!-- Minimum Range -->
+        <div class="form-group">
+            <label>Minimum Range : </label>
+            <input type="number" name="MinRange" #MinRange="ngModel" [(ngModel)]="labtestService.formDataOne.MinRange"
+                class="form-control" placeholder="Enter min range" minlength="1" maxlength="5"  min="1"
+                oninput="validity.valid||(value='');" required
+                [ngClass]="{'is-invalid': MinRange.touched && MinRange.invalid}">
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="MinRange.touched && MinRange.invalid"
+                style="color: red; text-align: left;">
+                <div *ngIf="MinRange.errors.required">
+                    MinRange is required!
+                </div>
+            </div>
+        </div>
+
+        <!-- Maximum Range -->
+        <div class="form-group">
+            <label>Maximum Range : </label>
+            <input type="number" name="MaxRange" #MaxRange="ngModel" [(ngModel)]="labtestService.formDataOne.MaxRange"
+                class="form-control" placeholder="Enter max range" minlength="1" maxlength="5" min="1"
+                oninput="validity.valid||(value='');" required
+                [ngClass]="{'is-invalid': MaxRange.touched && MaxRange.invalid}">
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="MaxRange.touched && MaxRange.invalid"
+                style="color: red; text-align: left;">
+                <div *ngIf="MaxRange.errors.required">
+                    MaxRange is required!
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Amount -->
+        <div class="form-group">
+            <label>Price Of Test : </label>
+            <input type="number" name="TotalAmount" #TotalAmount="ngModel"
+                [(ngModel)]="labtestService.formDataOne.TotalAmount" class="form-control" placeholder="Enter amount"
+                minlength="1" maxlength="4" min="1"
+                oninput="validity.valid||(value='');" required
+                [ngClass]="{'is-invalid': TotalAmount.touched && TotalAmount.invalid}">
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="TotalAmount.touched && TotalAmount.invalid"
+                style="color: red; text-align: left;">
+                <div *ngIf="TotalAmount.errors.required">
+                    Total Amount is required!
+                </div>
+            </div>
+        </div>
+        <!-- submit -->
+        <br>
+        <div class="form-group">
+            <button type="submit" class="btn btn-lg btn-primary form-control"
+                [disabled]="!(form.valid && form.dirty)">Submit</button>
+        </div>
+    </form>
+
+</div>

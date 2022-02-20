@@ -1,0 +1,179 @@
+<div class="container p-5">
+  <div class="my-2">
+    <h2 class="display-6 text-center">Edit Medicines</h2>
+  </div>
+  <form
+    name="medForm"
+    #form="ngForm"
+    autocomplete="off"
+    (ngSubmit)="onSubmit(form)"
+  >
+    <!-- medicine id  -->
+    <div class="form-group">
+      <input
+        type="hidden"
+        name="MedicineId"
+        [(ngModel)]="pharmService.formData.MedicineId"
+        class="form-control"
+      />
+    </div>
+    <!-- medicine name  -->
+    <div class="form-group my-3">
+      <label for="MedicineName">Medicine Name</label>
+      <input
+        autocomplete="off"
+        type="text"
+        class="form-control"
+        id="MedicineName"
+        name="MedicineName"
+        #MedicineName="ngModel"
+        [(ngModel)]="pharmService.formData.MedicineName"
+        class="form-control"
+        placeholder="Enter Medicine Name"
+        required
+        minlength="3"
+        maxlength="20"
+        [ngClass]="{
+          'is-invalid': MedicineName.invalid && MedicineName.touched
+        }"
+      />
+      <!-- validations  -->
+      <div
+        class="validation-error"
+        *ngIf="MedicineName.invalid && MedicineName.touched"
+      >
+        <div *ngIf="MedicineName.errors.required">
+          medicine name is required
+        </div>
+      </div>
+    </div>
+
+    <!-- medicine description  -->
+    <div class="form-group my-3">
+      <label for="MedicineDescription">Medicine Name</label>
+      <input
+        autocomplete="off"
+        type="text"
+        class="form-control"
+        id="MedicineDescription"
+        name="MedicineDescription"
+        #MedicineDescription="ngModel"
+        [(ngModel)]="pharmService.formData.MedicineDescription"
+        class="form-control"
+        placeholder="Enter Medicine Description"
+        required
+        minlength="3"
+        maxlength="200"
+        [ngClass]="{
+          'is-invalid':
+            MedicineDescription.invalid && MedicineDescription.touched
+        }"
+      />
+      <!-- validations  -->
+      <div
+        class="validation-error"
+        *ngIf="MedicineDescription.invalid && MedicineDescription.touched"
+      >
+        <div *ngIf="MedicineDescription.errors.required">
+          medicine Description is required
+        </div>
+      </div>
+    </div>
+    <!-- medicine price  -->
+    <div class="form-group my-3">
+      <label for="MedicinePrice">Medicine Price</label>
+      <input
+        autocomplete="off"
+        type="number"
+        class="form-control"
+        id="MedicinePrice"
+        name="MedicinePrice"
+        #MedicinePrice="ngModel"
+        [(ngModel)]="pharmService.formData.MedicinePrice"
+        class="form-control"
+        placeholder="Enter Medicine Price"
+        required
+        min="1"
+        oninput="validity.valid||(value='')"
+        minlength="1"
+        maxlength="10"
+        [ngClass]="{
+          'is-invalid': MedicinePrice.invalid && MedicinePrice.touched
+        }"
+      />
+      <!-- validations  -->
+
+      <div
+        class="validation-error"
+        *ngIf="MedicinePrice.invalid && MedicinePrice.touched"
+      >
+        <div *ngIf="MedicinePrice.errors.required">
+          Medicine price is required
+        </div>
+      </div>
+    </div>
+    <!-- Stock -->
+    <div class="form-group my-3">
+      <label for="Stock">Medicine Stock</label>
+      <input
+        autocomplete="off"
+        type="number"
+        class="form-control"
+        id="Stock"
+        name="Stock"
+        #Stock="ngModel"
+        [(ngModel)]="pharmService.formData.Stock"
+        class="form-control"
+        placeholder="Enter Medicine Stock"
+        required
+        min="1"
+        oninput="validity.valid||(value='')"
+        minlength="1"
+        maxlength="1000"
+        [ngClass]="{
+          'is-invalid': Stock.invalid && Stock.touched
+        }"
+      />
+      <!-- validations  -->
+      <div class="validation-error" *ngIf="Stock.invalid && Stock.touched">
+        <div *ngIf="Stock.errors.required">Medicine stock is required</div>
+      </div>
+    </div>
+    <!-- Dose  -->
+    <div class="form-group my-3">
+      <label for="Dose">Medicine Dose</label>
+      <input
+        autocomplete="off"
+        type="text"
+        class="form-control"
+        id="Dose"
+        name="Dose"
+        #Dose="ngModel"
+        [(ngModel)]="pharmService.formData.Dose"
+        class="form-control"
+        placeholder="Enter Medicine Dose"
+        required
+        minlength="1"
+        maxlength="10"
+        [ngClass]="{
+          'is-invalid': Dose.invalid && Dose.touched
+        }"
+      />
+      <!-- validations  -->
+      <div class="validation-error" *ngIf="Dose.invalid && Dose.touched">
+        <div *ngIf="Dose.errors.required">medicine dose is required</div>
+      </div>
+    </div>
+
+    <div class="my-3 d-flex justify-content-center">
+      <button class="button2">Save</button>
+      <button
+        class="button2"
+        style="background-color: rgb(202, 40, 81)"
+        routerLink="/medicines"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

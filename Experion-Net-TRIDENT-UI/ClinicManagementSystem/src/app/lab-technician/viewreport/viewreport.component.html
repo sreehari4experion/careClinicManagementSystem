@@ -1,0 +1,101 @@
+<!-- navbar  -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid">
+        <a class="navbar-brand"><img src="../../assets/images/logo small.png" class="img-fluid img logo" alt="" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-3">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#" routerLink="/lab-technician">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-bold">Features</a>
+                </li>
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle active" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ loggedUser |uppercase }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" (click)="logOut()">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- navbar  -->
+<div class="colorbar" style="
+      height: 1rem;
+      background: linear-gradient(to right, #c9e265, #38b6ff);
+      border-radius: 1.5rem;">
+</div>
+
+
+<div class="container">
+    <div class="header">
+        <div class="form-control">
+            <!-- Search -->
+            <input class="form-control" type="text" placeholder="Search TestReport using Name,Phone Number"[(ngModel)]="filter">
+            <br>
+            <a href="/lab-technician" class="btn btn-outline-secondary" style="float: right; margin-bottom:19px;">Go Back</a>
+            <br>
+            <button printTitle="Clinic Management System" printSectionId="pdfTable" class="btn btn-primary" ngxPrint>
+                Print
+              </button>
+                  <div class="row"  *ngFor="let rep of labtestservice.testreports|filter:filter|paginate:{itemsPerPage:1,currentPage:page}">
+                   <!--<div   *ngFor=" let items of rep index as i">-->
+                    <br>  
+                    <h3 style="text-align:center;">Test Report </h3>
+                    <div id="pdfTable">
+                    <span style="display: flex;justify-content: space-between;"><h5>Report Id: {{rep.LabBillId}}</h5>
+                        <h5>Appointment Date : {{rep.AppointmentDate | date:'dd-MMM-yyyy hh:mm aa'}}</h5></span>
+                        <span style="display: flex;justify-content: space-between;">
+                        <h5>Patient Name: {{rep.PatientName}}</h5>
+                        <h5>Test Report Date:{{rep.DateOfReport | date:'dd-MMM-yyyy hh:mm aa'}}</h5></span>
+                        <span style="display: flex;justify-content: space-between;">
+                            <h5>Phone No:{{rep.Phone}}</h5>
+                        <h5>Doctor: {{rep.DoctorName}} </h5>
+                        </span>
+                        <span style="display: flex;justify-content: space-between;">
+                        <h5>Blood Group: {{rep.BloodGroup}}</h5>
+                        <h5>Lab Technician:{{rep.LabTechnician}}</h5>
+                         </span>
+                        <table class="table table-primary table-striped table-bordered">
+                            <thead>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Value</th>
+                                <th>Min-Range</th>
+                                <th>Max-Range</th>
+                                <th>Test Rate</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of rep.TestReport; index as k;" >
+                                    <td>{{rep.TestReport[k].TestName}}</td>
+                                    <td>{{rep.TestReport[k].TestDescription}}</td>
+                                    <div *ngIf="rep.TestReport[k].TestValue>rep.TestReport[k].MaxRange||rep.TestReport[k].TestValue<rep.TestReport[k].MinRange; else elseBlock" [ngIfElse]="testrep">
+                                    <td  style="color: red;">{{rep.TestReport[k].TestValue}}</td>
+                                    </div>
+                                    
+                                    <ng-template #elseBlock> <td style="color: rgb(53, 119, 49);">{{rep.TestReport[k].TestValue}}</td> </ng-template>
+                                    <td id="min">{{rep.TestReport[k].MinRange}}</td>
+                                    <td id="max">{{rep.TestReport[k].MaxRange}}</td>
+                                    <td>{{rep.TestReport[k].TotalAmount}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h5 style="text-align: center;">Total Amount: Rs.{{rep.TotalAmount}}</h5>
+                    </div>
+                         <!--(click)="updateEmployee(emp.EmployeeID)"-->
+            </div>
+            </div>
+            <br>
+            <footer>
+               <pagination-controls (pageChange)="page= $event"></pagination-controls>
+            </footer>
+

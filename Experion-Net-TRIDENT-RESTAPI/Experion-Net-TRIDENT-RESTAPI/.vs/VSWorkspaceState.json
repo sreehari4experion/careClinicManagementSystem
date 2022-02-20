@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ClinicManagementSystem",
+    "\\ClinicManagementSystem\\Controllers",
+    "\\ClinicManagementSystem\\Repository",
+    "\\ClinicManagementSystem\\Repository\\Appointments",
+    "\\ClinicManagementSystem\\Repository\\MedicinesRepo"
+  ],
+  "SelectedNode": "\\ClinicManagementSystem\\ClinicManagementSystem.sln",
+  "PreviewInSolutionExplorer": false
+}

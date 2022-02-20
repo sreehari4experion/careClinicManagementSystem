@@ -1,0 +1,48 @@
+<div class="container-lg">
+    <div class="header">
+        <div class="form-control">
+            <!-- Search -->
+            <input class="form-control" type="text" placeholder="Search Appointment using Name,Phone Number"[(ngModel)]="filter">
+            <br>
+            <pagination-controls (pageChange)="page= $event"></pagination-controls>
+            <div style="display: flex;justify-content: flex-end;">
+            <select #filters (change)="Bind(filters.value)">
+                <option value="1">Booked</option>
+                <option value="2">With Doctor</option>
+                <option value="3">Ready to Bill</option>
+                <option value="5">Serviced</option>
+            </select>
+            </div>
+            <br><table class="table table-bordered table-stripped">
+                <thead style="background-color: #0183ce; color:azure;">
+                    <tr>
+                        <th>Appointment ID</th>
+                        <th>Token no</th>
+                        <th>Patient ID</th>
+                        <th>Patient Name</th>
+                        <th>Phone no</th>
+                        <th>Doctor</th>
+                        <th>Receptionist</th>                  
+                        <th>Appointment Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                   <tr  *ngFor="let app of receptionservice.appointments|filter:filter|paginate:{itemsPerPage:5,currentPage:page}">
+                        <td>{{app.AppointmentId}}</td>
+                        <td>{{app.TokenNo}}</td>
+                        <td>{{app.PatientId}}</td>
+                        <td>{{app.PatientName}}</td>
+                        <td>{{app.PhoneNumber}} </td>
+                        <td>{{app.DoctorName}}</td>
+                        <td>{{app.Receptionistname}}</td>
+                        <td>{{app.AppointmentDate | date:'dd-MMM-yyyy hh:mm aa'}}</td> 
+                       <!--<td> <button class="btn btn-sm btn-primary">Edit</button> &nbsp;&nbsp;-->  <!--(click)="updateEmployee(emp.EmployeeID)"
+                        </td>-->
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+
+              
+

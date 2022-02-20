@@ -1,0 +1,113 @@
+<div class="container">
+  <!-- center a div  -->
+
+  <div class="row d-flex justify-content-center mt-5">
+    <img class="img img-fluid" src="../../assets/images/main2.png" alt="" />
+  </div>
+
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="form-content login-form">
+      <!-- login part  -->
+      <p class="text-center" style="font-size: 2rem">Login</p>
+      <!-- form  -->
+      <form [formGroup]="loginForm" (ngSubmit)="loginCredentials()">
+        <!-- user name control  -->
+        <div class="my-3 form-group" style="display: flex; flex-direction: row">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Username"
+            name="LoginId"
+            formControlName="LoginId"
+            class="form-control"
+            minlength="3"
+            required
+            [ngClass]="{
+              'is-invalid':
+                formControls.LoginId.invalid && formControls.LoginId.touched
+            }"
+          />
+        </div>
+        <div class="validation"></div>
+        <!-- username validations -->
+        <div *ngIf="isSubmitted && formControls.LoginId.errors">
+          <div
+            *ngIf="formControls.LoginId.errors"
+            style="color: red; text-align: left"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-person"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"
+              />
+            </svg>
+            User Name is required
+          </div>
+        </div>
+        <!-- password  -->
+        <div class="my-3 form-group">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Enter Password"
+            name="Password"
+            formControlName="Password"
+            class="form-control"
+            minlength="3"
+            required
+            [ngClass]="{
+              'is-invalid':
+                formControls.Password.invalid && formControls.Password.touched
+            }"
+          />
+        </div>
+        <div class="validation"></div>
+        <!-- password validations -->
+        <div *ngIf="isSubmitted && formControls.Password.errors">
+          <div
+            *ngIf="formControls.Password.errors"
+            style="color: red; text-align: left"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-x-octagon"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"
+              />
+              <path
+                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+              />
+            </svg>
+            Password is required
+          </div>
+        </div>
+
+        <!-- button  -->
+        <!-- center a button  -->
+
+        <div class="my-3 text-center">
+          <button class="button2">Login</button>
+        </div>
+        <div
+          class="text-center"
+          *ngIf="error"
+          style="color: red; text-align: left"
+        >
+          {{ error }}
+        </div>
+      </form>
+      <!-- end form  -->
+    </div>
+  </div>
+</div>

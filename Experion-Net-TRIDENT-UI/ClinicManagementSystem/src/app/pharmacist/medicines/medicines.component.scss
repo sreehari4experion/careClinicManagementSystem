@@ -1,0 +1,90 @@
+.logo {
+  width: 13rem;
+}
+li {
+  padding: 0.9rem;
+}
+select,
+input {
+  // A reset of styles, including removing the default dropdown arrow
+  appearance: none;
+  // Additional resets for further consistency
+  background-color: transparent;
+  // border: 1px solid rgba(128, 128, 128, 0.51);
+  box-shadow: 2px #109cf1;
+  border-radius: 0.8rem;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  outline: none;
+  border-bottom: 2px solid #109cf1;
+  min-height: 3rem;
+  padding-left: 1.5rem;
+  font-size: 1.1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+p {
+  font-size: 1.5rem;
+}
+body {
+  background-color: #9ad0ec;
+}
+.button1 {
+  color: white;
+  background-color: #109cf1;
+  border: 5px solid transparent;
+  transition: 0.2s ease;
+  border-radius: 50px;
+  padding: 15px 20px;
+  font: 13px montserrat;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  margin: 1em;
+  cursor: pointer;
+}
+
+.button1:hover {
+  color: #109cf1;
+  background-color: white;
+  transform: scale(1.1);
+  border: 5px solid #109cf1;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.app {
+  box-shadow: 20px 20px 40px #bebebe, -20px -20px 40px #ffffff;
+}
+.button2 {
+  color: white;
+  background-color: #109cf1;
+  border: 5px solid transparent;
+  transition: 0.2s ease;
+  border-radius: 50px;
+  padding: 15px 20px;
+  font: 13px montserrat;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  margin: 1em;
+  cursor: pointer;
+}
+
+.button2:hover {
+  color: #109cf1;
+  background-color: white;
+  transform: scale(1.1);
+  border: 5px solid #109cf1;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}

@@ -1,0 +1,43 @@
+
+<div class="container-lg">
+    <div class="header">
+        <h3 style="text-align: center;">Add Consultation Bill</h3>
+        <div class="form-control">
+            <!-- Search -->
+            <br>
+            <pagination-controls (pageChange)="page= $event"></pagination-controls>
+      
+            <br><table class="table table-bordered table-stripped">
+                <thead style="background-color: #0183ce; color:azure;">
+                    <tr>
+                        <th>Appointment ID</th>
+                        <th>Patient</th>
+                        <th>Phone No</th>
+                        <th>Doctor</th>               
+                        <th>Appointment Date</th>
+                        <th>Consultation Amount</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                   <tr  *ngFor="let app of receptionservice.appointments|paginate:{itemsPerPage:2,currentPage:page}">
+                   
+                    <td>{{app.AppointmentId}}</td>
+                        <td>{{app.PatientName}}</td>
+                        <td>{{app.PhoneNumber}} </td>
+                        <td>{{app.DoctorName}}</td>
+                        <td >{{app.AppointmentDate | date:'dd-MMM-yyyy hh:mm aa'}}</td> 
+                        <td><input type="number" #TotalAmount="ngModel" [(ngModel)]="TotalAmounts"  required   placeholder="Amount"  value="100"  minlength="1" maxlength="5" min="100" max="5000" step="50"  oninput="validity.valid||(value='100');" required name="TotalAmount" ></td>
+                       <td class="buton" > <button class="btn btn-sm btn-primary" type="button" (click)="OnSubmit(app.AppointmentId,TotalAmounts)" >
+                           Add Bill</button> &nbsp;&nbsp;  <!--(click)="updateEmployee(emp.EmployeeID)"-->
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+            <br>
+            </div>
+            </div>
+            </div>

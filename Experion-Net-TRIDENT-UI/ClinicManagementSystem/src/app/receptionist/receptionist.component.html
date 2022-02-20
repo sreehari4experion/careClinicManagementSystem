@@ -1,0 +1,112 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="container-fluid">
+    <a class="navbar-brand"
+      ><img
+        src="../../assets/images/logo small.png"
+        class="img-fluid img logo"
+        alt=""
+    /></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse justify-content-end"
+      id="navbarNavDropdown"
+    >
+      <ul class="navbar-nav mx-3">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/receptionist">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-bold">Features</a>
+        </li>
+
+        <li class="nav-item dropdown active">
+          <a
+            class="nav-link dropdown-toggle active"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ this.username }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li>
+              <a class="dropdown-item text-danger" (click)="logout()">Logout</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- navbar  -->
+<div
+  class="colorbar"
+  style="
+    height: 1rem;
+    background: linear-gradient(to right, #c9e265, #38b6ff);
+    border-radius: 1.5rem;
+  ">
+</div>
+<!-- contents  -->
+<div class="container-fluid">
+  <div class="row">
+    <h2 class="display-6 my-1">Dashboard</h2>
+  </div><br>
+  <div class="parent" style="background-color: #0183ce;">
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Patients
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" (click)="addPatients()">Add Patients</a></li>
+          <li><a class="dropdown-item" (click)="viewPatients()">View Patients</a></li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+     Appointments
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" (click)="viewAppoint()">View Appointments</a></li>
+
+          <li><a class="dropdown-item" (click)="addAppoint()">Book Appointments</a></li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Consultation
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" (click)="addConsult()">Add Consultation Bill </a></li>
+
+          <li><a class="dropdown-item" (click)="viewConsult()">View Consultation Bill</a></li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Invoice
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><a class="dropdown-item" (click)="addInvoice()">Add Invoice Bill </a></li>
+          <li><a class="dropdown-item" (click)="viewInvoice()">View Invoice Bill</a></li>
+        </ul>
+      </div>
+  </div>
+  <div class="row">
+    <div class="container-lg ">
+        <iframe id="frame" src="receptionist/dashboard" class="responsive-iframe" scrolling="no" style="border:none;">
+        </iframe>
+    </div>
+  </div>
+</div>

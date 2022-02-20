@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="header">
+        <div class="form-control">
+            <!-- Search -->
+            <input class="form-control" type="text" placeholder="Search Appointment using Name,Phone Number" [(ngModel)]="filter">
+            <br>
+            <!--<a [routerLink]="" class="btn btn-outline-secondary" style="float: right; margin-bottom:19px;">Final Bill </a>-->
+            <div class="col">
+                <div style="display: flex; justify-items:end">
+                    <button printTitle="Clinic Management System" printSectionId="pdfTable" class="btn btn-primary" ngxPrint>
+                        Print
+                      </button>
+                </div>
+                <div id="pdfTable" #pdfTable>
+                    <h3 style="text-align: center;">Final Invoice </h3>
+                <div class="row"  *ngFor="let bill of receptionservice.bills|filter:filter|paginate:{itemsPerPage:1,currentPage:page}">
+                 <span style="display:flex;justify-content: space-between;">
+                 <h6>Bill Id: {{bill.BillId}}</h6><br>
+              <h6>Appointment Date: {{bill.AppointmentDate | date:'dd-MMM-yyyy hh:mm aa'}}</h6>
+              </span>
+              <span style="display:flex;justify-content: space-between;">
+                 <h6>Patient Name : {{bill.PatientName}}</h6>
+             <h6>Doctor:{{bill.DoctorName}}</h6> 
+             </span>
+             <span style="display:flex;justify-content: space-between;">
+                 <h6>Date of Birth:{{bill.DateOfBirth| date:'dd-MMM-yyyy'}}</h6>
+                 <h6>Receptionist: {{bill.ReceptionistName}}</h6>
+                </span>
+                <span style="display:flex;justify-content: space-between;">
+              <h6>Phone No: {{bill.Phone}}</h6>
+             <h6>Address :{{bill.Address}}</h6>
+              </span>
+              <span style="display:flex;justify-content: space-between;">
+              <h6>Blood Group: {{bill.BloodGroup}}</h6>
+              <h6>Date of Bill:{{bill.BillDate|date:'dd-MMM-yyyy hh:mm aa'}}</h6>
+              </span>
+              <table class="table table-striped table-info">
+                  <thead>
+                      <th style="text-align: center;">SERVICES </th>
+                  </thead>
+
+                <tbody>
+                    <tr>
+                <th>ConsultationFee</th>
+              <td>{{bill.ConsultationFee}}</td>
+              </tr>
+              <tr>
+                <th>Medicine Bill</th>
+                <td>{{bill.MedicinesFee}}</td>
+            </tr>
+            <tr>
+                <th>Lab Test Fee</th>
+                 <td>{{bill.LabTestsFee}}</td>
+                </tr>
+                <tr>
+                    <th>Total Amount</th>
+                <th>{{bill.TotalAmount}}</th>
+            </tr>
+            </tbody>    
+             </table>
+                </div>
+            </div>
+         </div>
+          
+        </div>
+        </div>
+            <br>
+            <footer>
+              <pagination-controls (pageChange)="page= $event"></pagination-controls>
+            </footer>
+

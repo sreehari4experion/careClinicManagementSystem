@@ -1,0 +1,86 @@
+<!-- navbar  -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid">
+        <a class="navbar-brand"><img src="../../assets/images/logo small.png" class="img-fluid img logo" alt="" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-3">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#" routerLink="/admin">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-bold">Features</a>
+                </li>
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle active" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        {{loggedUser}}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" (click)="logOut()">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- navbar  -->
+<div class="colorbar" style="
+      height: 1rem;
+      background: linear-gradient(to right, #c9e265, #38b6ff);
+      border-radius: 1.5rem;
+    "></div>
+
+
+
+
+
+<div>
+    <form name="qualform" #form="ngForm" autocomplete="off" style="margin-top: 5px; margin-left: 150px; margin-right: 150px; padding: 100px;" (ngSubmit)="onSubmit(form)">
+        <!-- roles dropdown -->
+        <div class="form-group">
+            <label style="color: black;">Role :</label>
+            <select name="RoleId" id="RoleId" class="form-control" #RoleId="ngModel"
+                [(ngModel)]="staffService.qualFormData.RoleId">
+                <option value=0 disabled></option>
+                <option *ngFor="let r of staffService.roles" value="{{r.RoleId}}">{{r.Role1}}</option>
+            </select>
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="RoleId.touched && RoleId.invalid"
+                style="color: red; text-align: left;">
+                <div *ngIf="RoleId.errors.required">
+                    Role is required!
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Staff last  Name -->
+        <div class="form-group">
+            <label style="color: black">Qualification : </label>
+            <input type="text" name="Qualification" #Qualification="ngModel"
+                [(ngModel)]="staffService.qualFormData.Qualification" class="form-control"
+                placeholder="Enter Qualification" minlength="1" maxlength="15" required
+                [ngClass]="{'is-invalid': Qualification.touched && Qualification.invalid}">
+            <!-- validation -->
+            <div class="validation-errors" *ngIf="Qualification.touched && Qualification.invalid"
+                style="color: red; text-align: left;">
+                <div *ngIf="Qualification.errors.required">
+                    Qualification is required!
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="form-group">
+            <button type="submit" class="btn btn-lg btn-primary form-control"
+                [disabled]="!(form.valid && form.dirty)">Submit</button>
+        </div>
+    </form>
+
+</div>

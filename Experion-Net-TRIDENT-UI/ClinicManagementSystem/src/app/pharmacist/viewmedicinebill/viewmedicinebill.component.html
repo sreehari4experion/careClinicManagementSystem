@@ -1,0 +1,198 @@
+<!-- navbar  -->
+<!-- navbar  -->
+<nav class="navbar navbar-expand-lg shadow" style="background: #38b6ff">
+  <div class="container-fluid">
+    <a class="navbar-brand"
+      ><img
+        src="../../assets/images/logo.png"
+        class="img-fluid img logo"
+        alt=""
+    /></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse justify-content-end"
+      id="navbarNavDropdown"
+    >
+      <ul class="navbar-nav mx-3">
+        <!-- <li class="nav-item">
+          <a class="nav-link active text-bold button2" routerLink="/doctor"
+            >Dashboard</a
+          >
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link active text-bold button2" routerLink="/pharmacist"
+            >Medicine Advices</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active button2"
+            aria-current="page"
+            routerLink="/medicines"
+            >Medicines</a
+          >
+        </li>
+
+        <li class="nav-item dropdown active">
+          <a
+            class="nav-link dropdown-toggle active button2"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="19"
+              height="19"
+              fill="currentColor"
+              class="bi bi-person-circle mx-3"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+              <path
+                fill-rule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+              />
+            </svg>
+            {{ this.username }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li>
+              <a class="dropdown-item text-danger" (click)="logout()">Logout</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- content  -->
+
+<div class="container-fluid">
+  <h3 class="display-6 my-3">Medicine Bill</h3>
+  <div
+    class="shadow-sm p-5 m-2"
+    style="border: 0px; border-bottom: 3px solid #38b6ff"
+  >
+    <div class="form-control" style="border: 0px">
+      <!-- Search -->
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Search Appointment using Name,Phone Number"
+        [(ngModel)]="filter"
+      />
+      <br />
+
+      <div
+        class="table-responsive-xl"
+        id="tablePdf"
+        style="display: flex; justify-content: center; margin-top: 3rem"
+      >
+        <br />
+        <div class="col">
+          <h3 style="text-align: center" class="">Medicine Bill</h3>
+          <div
+            class="row my-3"
+            *ngFor="
+              let med of medicineservice.medicinebills
+                | filter: filter
+                | paginate: { itemsPerPage: 1, currentPage: page }
+            "
+          >
+            <span style="display: flex; justify-content: space-between">
+              <h6>Medicine Bill Id: {{ med.MedicineBillId }}</h6>
+              <br />
+              <h6>
+                Appointment Date:
+                {{ med.AppointmentDate | date: "dd-MMM-yyyy hh:mm aa" }}
+              </h6>
+            </span>
+            <span style="display: flex; justify-content: space-between">
+              <h6>Patient Name : {{ med.PatientName }}</h6>
+              <h6>Doctor:{{ med.DoctorName }}</h6>
+            </span>
+            <span style="display: flex; justify-content: space-between">
+              <h6>Date of Birth:{{ med.DateOfBirth | date: "dd-MMM-yyyy" }}</h6>
+              <h6>Receptionist: {{ med.ReceptionistName }}</h6>
+            </span>
+            <span style="display: flex; justify-content: space-between">
+              <h6>Phone No: {{ med.Phone }}</h6>
+              <h6>Pharmacist :{{ med.PharmacistName }}</h6>
+            </span>
+            <span style="display: flex; justify-content: space-between">
+              <h6>Blood Group: {{ med.BloodGroup }}</h6>
+              <h6>
+                Date of Bill:{{ med.DateOfBill | date: "dd-MMM-yyyy hh:mm aa" }}
+              </h6>
+            </span>
+            <table class="table table-info table-striped my-5">
+              <thead>
+                <th>Medicine Name</th>
+                <th>Medicine Description</th>
+                <th>Medicine Rate</th>
+                <th>Quantity</th>
+                <th>Dose</th>
+                <th>Price</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of med.MedicinesList; index as i">
+                  <td>{{ med.MedicinesList[i].MedicineName }}</td>
+                  <td>{{ med.MedicinesList[i].MedicineDescription }}</td>
+                  <td>{{ med.MedicinesList[i].MedicinePrice }}</td>
+                  <td>{{ med.MedicinesList[i].Quantity }}</td>
+                  <td>{{ med.MedicinesList[i].Dose }} mg</td>
+                  <td>Rs. {{ med.MedicinesList[i].Rate }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <h4 style="text-align: center">
+              Total Price: Rs.{{ med.TotalAmount }}
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!---->
+  <div
+    class="btn-class my-4"
+    style="display: flex; flex-direction: row; justify-content: center"
+  >
+    <button
+      printTitle="Clinic Management System"
+      printSectionId="tablePdf"
+      class="button1 mx-2"
+      ngxPrint
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-printer mx-1"
+        viewBox="0 0 16 16"
+      >
+        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
+        <path
+          d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"
+        />
+      </svg>
+      Print
+    </button>
+  </div>
+</div>
+<footer class="text-center my-3">
+  <pagination-controls (pageChange)="page = $event"> </pagination-controls>
+</footer>

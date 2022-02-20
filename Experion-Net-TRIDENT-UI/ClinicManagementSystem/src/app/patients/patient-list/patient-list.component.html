@@ -1,0 +1,88 @@
+<!-- navbar   -->
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <div class="container-fluid">
+    <a class="navbar-brand"><img src="../../assets/images/logo small.png" class="img-fluid img logo" alt="" /></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+      <ul class="navbar-nav mx-3">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active text-bold">Features</a>
+        </li>
+
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle active" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Tridents
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" (click)="logOut()">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="colorbar" style="
+      height: 1rem;
+      background: linear-gradient(to right, #c9e265, #38b6ff);
+      border-radius: 1.5rem;
+    "></div> -->
+
+
+<!-- navbar  -->
+
+<div>
+
+  <div class="container">
+    <div class="header">
+      <input class="form-control" style="padding: 10px; margin-top: 40px;" type="text" placeholder="Search Patients by ID, Name and Phone no"
+        [(ngModel)]="filter">
+      <!-- {{filter}} -->
+
+      - <a [routerLink]="" class="btn btn-primary btn-outline-info text-dark"
+            style="float: right; margin-top: 20px; margin-right: 0px; margin-bottom: 10px; "  (click)="addPatient()">Add Patient</a>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>PatientID</th>
+                <th>Patient Name</th>
+                <th>Phone </th>
+                <th>Sex</th>
+                <th>Address</th>
+                <th>DateOfBirth</th>
+                <th>BloodGroup</th>
+                <th>Action</th>              
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr *ngFor="let p of patientService.patients | filter: filter | paginate: {itemsPerPage :6, currentPage: page} ">
+                <td>{{p.PatientId}}</td>
+                <td>{{p.PatientName}}</td>
+                <td>{{p.Phone}}</td>
+                <td>{{p.Sex}}</td>
+                <td>{{p.Address}}</td>
+                <td>{{p.DateOfBirth | date: 'dd-MMM-yyyy'}}</td>
+                <td>{{p.BloodGroup}}</td>
+                <td>
+                    <!-- button -->
+                    <button class="btn btn-sm btn-info" (click)="updatePatient(p.PatientId)">Edit</button>
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <footer>
+      <!-- pagination -->
+      <pagination-controls (pageChange)="page =($event)"></pagination-controls>
+
+    </footer>
+  </div>
+</div>

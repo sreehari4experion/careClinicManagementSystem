@@ -1,0 +1,67 @@
+
+
+<div class="container-lg">
+    <div class="header">
+        <h3 style="text-align: center;">Add Final Invoice </h3>
+        <hr style="color: #0183ce;">
+        <div class="form-control">
+            <!-- Search -->
+            <br>
+            <pagination-controls (pageChange)="page= $event"></pagination-controls>
+      
+            <br><table class="table table-bordered table-stripped">
+                <thead style="background-color: #0183ce; color:azure;">
+                    <tr>
+                        <th>Appointment ID</th>
+                        <th>Patient</th>
+                        <th>Doctor</th>               
+                        <th>Appointment Date</th>
+                        <th>Consultation Amount </th>
+                        <th><img src="assets/images/med.png" height="45" width="45"></th>
+                        <th>Medicines Amount </th>
+                        <th><img src="assets/images/lab.png" height="45" width="45"></th>
+                        <th>LabTest Amount</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tr  *ngFor="let app of receptionservice.finalbill|paginate:{itemsPerPage:3,currentPage:page}">
+                        <td>{{app.BillId}}</td>
+                        <td>{{app.PatientName}}</td>
+                        <td>{{app.DoctorName}}</td>
+                        <td >{{app.AppointmentDate | date:'dd-MMM-yyyy hh:mm aa'}}</td> 
+                        <td>{{app.ConsultationFee}}</td>
+                        <div *ngIf="app.MedDone==1  else else1">
+                        <td><img src="assets/images/x.png" width="40" height="40"></td>
+                        </div>
+                        <ng-template #else1> 
+                            <div *ngIf="app.MedDone==0 else e1">
+                                <span style="color:rgb(0, 102, 204);" >N/A</span>
+                            </div>
+                            <ng-template #e1>    <td><img src="assets/images/tick.png" width="40" height="40"></td> </ng-template>
+                        </ng-template>
+                        <td>{{app.MedicinesFee}}</td>
+                        <div *ngIf="app.LabDone==1  else else2">
+                            <td><img src="assets/images/x.png" width="40" height="40"></td>
+                            </div>
+                            <ng-template #else2> 
+                                <div *ngIf="app.LabDone==0 else e2">
+                                    <td><span style="color:rgb(0, 102, 204);" >N/A</span></td>  
+                                </div>
+                               </ng-template>
+                               <ng-template #e2>  <td><img src="assets/images/tick.png" width="40" height="40"></td> </ng-template>
+                        <td>{{app.LabTestsFee}}</td>
+                        <div *ngIf="app.MedDone==1 || app.LabDone==1; else elseBlock" >
+                            <td class="buton" > <button class="btn btn-sm btn-primary" type="button" disabled >
+                               Generate Bill</button> &nbsp;&nbsp;  <!--(click)="updateEmployee(emp.EmployeeID)"-->
+                             </td>
+                            </div>
+                            
+                            <ng-template #elseBlock> <td><button class="btn btn-sm btn-primary" (click)="Submit(app.BillId,app.MedicinesFee+app.ConsultationFee+app.LabTestsFee)" >Generate Bill</button></td> </ng-template>
+                        </tr>
+                </tbody>
+            </table>
+            <br>
+            </div>
+            </div>
+            </div>

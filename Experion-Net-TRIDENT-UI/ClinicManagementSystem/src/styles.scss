@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+  // font-family: 'Montserrat', sans-serif;
+  font-family: "Noto Sans", sans-serif;
+  // font-family: "Roboto", sans-serif;
+}
+.hide {
+  display: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #2a2a2a;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #38b6ff;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #109cf1;
+}
+@import "~@ng-select/ng-select/themes/material.theme.css";

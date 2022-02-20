@@ -1,0 +1,143 @@
+<!-- navbar  -->
+<nav class="navbar navbar-expand-lg shadow" style="background: #38b6ff">
+  <div class="container-fluid">
+    <a class="navbar-brand"
+      ><img
+        src="../../assets/images/logo.png"
+        class="img-fluid img logo"
+        alt=""
+    /></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="collapse navbar-collapse justify-content-end"
+      id="navbarNavDropdown"
+    >
+      <ul class="navbar-nav mx-3">
+        <!-- <li class="nav-item">
+          <a class="nav-link active text-bold button2" routerLink="/doctor"
+            >Dashboard</a
+          >
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link active text-bold button2" routerLink="/medicines"
+            >Medicines</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active text-bold button2"
+            routerLink="/medicinesbill"
+            >Medicines Bill</a
+          >
+        </li>
+
+        <li class="nav-item dropdown active">
+          <a
+            class="nav-link dropdown-toggle active button2"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="19"
+              height="19"
+              fill="currentColor"
+              class="bi bi-person-circle mx-3"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+              <path
+                fill-rule="evenodd"
+                d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+              />
+            </svg>
+            {{ this.username }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li>
+              <a class="dropdown-item text-danger" (click)="logout()">Logout</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- contents  -->
+<div class="container-fluid">
+  <h2 class="display-6 my-3">Prescriptions</h2>
+  <div
+    class="row p-3 justify-content-center shadow-sm"
+    style="border: 1px solid #109cf1"
+  >
+    <input
+      class="form-control m-0"
+      type="text"
+      placeholder="Search from the list"
+      [(ngModel)]="filter"
+    />
+    {{ filter }}
+  </div>
+  <div
+    class="row my-5 shadow-sm p-2 py-5 m-5 justify-content-around"
+    style="border-bottom: 3px solid #38b6ff"
+    *ngFor="
+      let item of pharmService.advice
+        | filter: filter
+        | paginate: { itemsPerPage: 4, currentPage: page }
+    "
+  >
+    <div class="token col-md-2">
+      <div class="px-3">
+        <h5 class="text-center">Appointment ID : {{ item.AppointmentId }}</h5>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <p>Patient ID : {{ item.PatientId }}</p>
+      <p>Patient Name : {{ item.Patient }}</p>
+    </div>
+    <div class="col-md-3 d-flex align-items-center">
+      <button
+        class="button1 mx-2 mb-2"
+        (click)="updatePrescription(item.AppointmentId)"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-pencil-square"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+          />
+        </svg>
+        View Details
+      </button>
+    </div>
+  </div>
+  <div class="paginate justify-content-center">
+    <pagination-controls
+      (pageChange)="page = $event"
+      class="text-center"
+    ></pagination-controls>
+  </div>
+</div>

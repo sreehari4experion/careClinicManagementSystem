@@ -1,0 +1,108 @@
+<!-- navbar  -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid">
+      <a class="navbar-brand"
+        ><img
+          src="../../assets/images/logo small.png"
+          class="img-fluid img logo"
+          alt=""
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse justify-content-end"
+        id="navbarNavDropdown"
+      >
+        <ul class="navbar-nav mx-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#" routerLink="/admin">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-bold">Features</a>
+          </li>
+  
+          <li class="nav-item dropdown active">
+            <a
+              class="nav-link dropdown-toggle active"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+            {{ loggedUser |uppercase }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" (click)="logOut()">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- navbar  -->
+  <div
+    class="colorbar"
+    style="
+      height: 1rem;
+      background: linear-gradient(to right, #c9e265, #38b6ff);
+      border-radius: 1.5rem;
+    "
+  ></div>
+
+
+<div class="container">
+    <div class="header">
+        <div class="form-control mt-2" style="width: 300px;">
+            <input class="form-control" type="text" placeholder="search" [(ngModel)]="filter" >
+            <!-- {{filter}} -->          
+        </div>       
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead class="table-head " style="background-color: rgb(118, 197, 211);">
+            <tr>
+                <th>StaffID</th>
+                <th>first Name</th>
+                <th>Last Name </th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>DateOfBirth</th>
+                <th>Qualification</th>
+                <th>Role Name</th>
+                <th>Action</th>                
+            </tr>
+        </thead>
+        <tbody>           
+            <tr *ngFor="let s of staffService.staffs | filter: filter | paginate: {itemsPerPage :2, currentPage: page} ">
+                <td>{{s.StaffId}}</td>
+                <td>{{s.FirstName}}</td>
+                <td>{{s.LastName}}</td>
+                <td>{{s.Phone}}</td>
+                <td>{{s.Address}}</td>
+                <td>{{s.DateOfBirth | date: 'dd-MMM-yyyy'}}</td>
+                <td>{{s.Qualification}}</td>
+                <td>{{s.Role1}}</td>
+                <td>
+                    <!-- button -->
+                    <button class="btn btn-sm btn-info" (click)="toUpdateStaff(s.StaffId)">Edit</button>                   
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <footer>
+         <!-- pagination -->
+         <pagination-controls (pageChange)="page =($event)"></pagination-controls>
+
+    </footer>   
+</div>
+
+
+

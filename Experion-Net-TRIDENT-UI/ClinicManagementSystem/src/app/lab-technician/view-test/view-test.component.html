@@ -1,0 +1,88 @@
+<!-- navbar  -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid">
+        <a class="navbar-brand"><img src="../../assets/images/logo small.png" class="img-fluid img logo" alt="" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-3">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#" routerLink="/lab-technician">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-bold">Features</a>
+                </li>
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle active" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ loggedUser |uppercase }}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" (click)="logOut()">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- navbar  -->
+<div class="colorbar" style="
+      height: 1rem;
+      background: linear-gradient(to right, #c9e265, #38b6ff);
+      border-radius: 1.5rem;
+    "></div>
+
+<a href="/lab-technician" class="btn btn-dark">Go Back</a>
+<div class="container">
+    <div class="header">
+        <div class="form-control mt-2" style="width: 300px;">
+            <input class="form-control" type="text" placeholder="search" [(ngModel)]="filter">
+            <!-- {{filter}} -->
+            <!-- [(ngModel)]="filter"{{filter}} -->
+        </div>
+
+
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>TestID</th>
+                <th>Test Name</th>
+                <th>Test Description </th>
+                <th>Unit</th>
+                <th>MinRange</th>
+                <th>MaxRange</th>
+                <th>Total Amount</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <!-- | filter: filter | paginate: {itemsPerPage :2, currentPage: page} -->
+            <tr
+                *ngFor="let p of labtestService.tests | filter: filter | paginate: {itemsPerPage :3, currentPage: page} ">
+                <td>{{p.TestId}}</td>
+                <td>{{p.TestName}}</td>
+                <td>{{p.TestDescription}}</td>
+                <td>{{p.Unit}}</td>
+                <td>{{p.MinRange}}</td>
+                <td>{{p.MaxRange}}</td>
+                <td>{{p.TotalAmount}}</td>
+                <td>
+                    <!-- button -->
+                    <button class="btn btn-sm btn-info" (click)="updateTest(p.TestId)">Edit</button>
+                    <!-- &nbsp;
+                    <button class="btn btn-sm btn-danger" (click)="deletePost(p.Postid)">Delete</button> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <footer>
+        <!-- pagination -->
+        <pagination-controls (pageChange)="page =($event)"></pagination-controls>
+
+    </footer>
